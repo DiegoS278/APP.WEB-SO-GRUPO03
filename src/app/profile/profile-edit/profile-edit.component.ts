@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {ProfileService} from "../service/profile.service";
 
 @Component({
   selector: 'app-profile-edit',
@@ -10,12 +11,9 @@ export class ProfileEditComponent {
   profileForm: FormGroup;
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private profileService: ProfileService) {
     this.profileForm = this.fb.group({
-      name: ['', Validators.required],
       photo: [null],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required]
 
     });
@@ -28,15 +26,19 @@ export class ProfileEditComponent {
   onSubmit() {
     if (this.profileForm.valid) {
       const formData = new FormData();
-      formData.append('name', this.profileForm.get('name')?.value);
       if (this.selectedFile) {
-        formData.append('photo', this.selectedFile);
+        formData.append('profilePicture', this.selectedFile);
       }
-      formData.append('password', this.profileForm.get('password')?.value);
-      formData.append('email', this.profileForm.get('email')?.value);
-
-      // Aquí puedes manejar el envío de los datos, por ejemplo, a un servicio
-      console.log('Perfil actualizado', formData);
+      formData.append('phoneNumber', this.profileForm.get('phoneNumber')?.value);
+      let userId = String(localStorage.getItem('userId'));
+      this.profileService.updateProfile(userId, formData).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.error(error);
+        }
+      );
     }
   }
 }

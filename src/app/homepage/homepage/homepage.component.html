@@ -1,3 +1,9 @@
+<div *ngIf="profile">
+  <div>Usuario: {{profile.name}}</div>
+  <div class="profile-card">
+    <img [src]=profile.profilePicture alt="Imagen de perfil">
+  </div>
+</div>
 <div class="homepage-container">
     <div class="top-right">
       <button class="profile-button" routerLink="/profile/edit">Perfil</button>
