@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Nueva Transacción</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>ID de cuenta a transferir</mat-label>
+    <input matInput [(ngModel)]="transaction.details.toAccount" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Monto</mat-label>
+    <input matInput type="number" [(ngModel)]="transaction.amount" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Moneda</mat-label>
+    <mat-select [(ngModel)]="transaction.currency">
+      <mat-option value="SOL">SOL</mat-option>
+      <mat-option value="USD">USD</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tipo</mat-label>
+    <mat-select [(ngModel)]="transaction.type">
+      <mat-option value="Transfer">Transferencia</mat-option>
+      <mat-option value="Payment">Pago</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="transaction.details.description"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="createTransaction()">Crear</button>
+</div>

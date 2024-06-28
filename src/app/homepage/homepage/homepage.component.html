@@ -1,34 +1,35 @@
-<div *ngIf="profile">
-  <div>Usuario: {{profile.name}}</div>
-  <div class="profile-card">
-    <img [src]=profile.profilePicture alt="Imagen de perfil">
+<div class="main-container">
+  <div class="w-full h-16 flex justify-between items-center bg-blue-50">
+    <div class="pl-5">
+      <h3 class="font-bold text-2xl">BanBif</h3>
+    </div>
+    <div>
+      <button class="profile-button" routerLink="/profile/edit">Editar Perfil</button>
+      <button class="profile-button" (click)="logout()">Log out</button>
+    </div>
   </div>
+  <div class="flex bg-gray-300 h-full">
+    <div class="profile-section w-1/4 bg-gray-50 ">
+      <div *ngIf="profile">
+        <div class="w-full">
+          <img [src]=profile.profilePicture alt="Imagen de perfil">
+        </div>
+        <div class="flex flex-col align-middle items-center gap-3 mt-5">
+          <div class="font-bold">Usuario</div>
+          {{profile.name}}
+          <div class="font-bold">Correo</div>
+          {{profile.email}}
+          <div class="font-bold">Numero de telefono</div>
+          {{profile.phoneNumber}}
+        </div>
+      </div>
+    </div>
+    <div class="content w-3/4">
+      <div class="transaction flex flex-col items-center w-full mt-5 gap-5">
+        <button class="transaction-button w-1/4" (click)="openDialog()">Crear Transacción</button>
+        <app-transaction-list></app-transaction-list>
+      </div>
+    </div>
+  </div>
+
 </div>
-<div class="homepage-container">
-    <div class="top-right">
-      <button class="profile-button" routerLink="/profile/edit">Perfil</button>
-    </div>
-    <div class="content">
-      <div class="card">
-        <h3>Subtitulo 1</h3>
-        <p>Este es el cuerpo del botón. Aquí puedes escribir el texto que desees.</p>
-      </div>
-      <div class="card">
-        <h3>Subtitulo 2</h3>
-        <p>Este es otro cuerpo del botón. Puedes personalizarlo como prefieras.</p>
-      </div>
-      <button class="transaction-button" routerLink="/transactions/new">Crear Transacción</button>
-    </div>
-    <div class="chat">
-      <div class="chat-header">
-        Chat
-      </div>
-      <div class="chat-body">
-        <p>Hola! ¿Cómo puedo ayudarte?</p>
-      </div>
-      <div class="chat-footer">
-        <input type="text" placeholder="Escribe un mensaje..." />
-        <button>Enviar</button>
-      </div>
-    </div>
-  </div>

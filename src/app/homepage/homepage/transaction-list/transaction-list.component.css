@@ -1,0 +1,16 @@
+.empty-transactions {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.empty-transactions h2 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.empty-transactions p {
+  color: #666;
+}

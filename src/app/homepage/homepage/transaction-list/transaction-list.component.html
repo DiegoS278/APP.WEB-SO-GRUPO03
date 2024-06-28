@@ -1,0 +1,58 @@
+<div *ngIf="transactions && transactions.length > 0">
+  <mat-table [dataSource]="transactions">
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.amount}} </mat-cell>
+    </ng-container>
+
+    <!-- Currency Column -->
+    <ng-container matColumnDef="currency">
+      <mat-header-cell *matHeaderCellDef> Currency </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.currency}} </mat-cell>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="transactionDate">
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.transactionDate | date}} </mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.type}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.status}} </mat-cell>
+    </ng-container>
+
+    <!-- From Column -->
+    <ng-container matColumnDef="fromAccount">
+      <mat-header-cell *matHeaderCellDef> From </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.details.fromAccount}} </mat-cell>
+    </ng-container>
+
+    <!-- To Column -->
+    <ng-container matColumnDef="toAccount">
+      <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.details.toAccount}} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.details.description}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+<div *ngIf="!transactions || transactions.length === 0" class="empty-transactions">
+  <h2>No se han realizado transacciones aún</h2>
+  <p>Una vez que realices transacciones, aparecerán aquí. Puedes comenzar haciendo clic en el botón "Crear Transacción".</p>
+</div>

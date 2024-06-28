@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfileService} from "../../profile/service/profile.service";
+import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {CreateTransactionComponent} from "./create-transaction/create-transaction.component";
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +10,8 @@ import {ProfileService} from "../../profile/service/profile.service";
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements  OnInit{
-  baseUrl = 'http://localhost:9000/';
   profile: any = null;
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: ProfileService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -17,7 +19,6 @@ export class HomepageComponent implements  OnInit{
     this.profileService.getProfileById(id).subscribe(
       response => {
         this.profile = response;
-        this.profile.profilePicture = this.profile.profilePicture;
         console.log(this.profile)
       },
       error => {
@@ -25,5 +26,12 @@ export class HomepageComponent implements  OnInit{
       }
     );
   }
-
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.router.navigate(['/']);
+  }
+  openDialog(): void {
+    this.dialog.open(CreateTransactionComponent);
+  }
 }
